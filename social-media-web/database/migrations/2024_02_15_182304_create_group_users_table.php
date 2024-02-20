@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('group_users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('group_id')->constrained('groups');
+            $table->foreignId('deleted_by')->constrained('users');
+            $table->timestamp('deleted_at')->nullable();
+            $table->string('status', 25);
+            $table->string('role', 25);
+            $table->string('token', 1024)->nullable();
+            $table->timestamp('token_expired_at')->nullable();
+            $table->timestamp('token_used_at')->nullable();
             $table->timestamps();
         });
     }

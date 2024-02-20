@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
+            $table->string('slug', 255);
+            $table->text('about')->nullable();
+            $table->boolean('auto_approval')->default(true);
+            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('deleted_by')->constrained('users');
+            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->timestamps();
         });
     }
