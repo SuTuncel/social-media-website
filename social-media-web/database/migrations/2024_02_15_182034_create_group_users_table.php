@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('group_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('created_by')->constrained('users');
             $table->foreignId('group_id')->constrained('groups');
             $table->foreignId('deleted_by')->constrained('users');
             $table->timestamp('deleted_at')->nullable();
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string('token', 1024)->nullable();
             $table->timestamp('token_expired_at')->nullable();
             $table->timestamp('token_used_at')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
